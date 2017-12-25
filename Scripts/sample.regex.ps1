@@ -1,4 +1,6 @@
-﻿function Increment-Colspan([string] $td)
+﻿# Pointer: https://ss64.com/ps/syntax-regex.html
+
+function Increment-Colspan([string] $td)
 {
     $match = 'colspan="'
     $colSpanIndex = $td.LastIndexOf($match)
@@ -18,7 +20,7 @@ function Trim-Date([string] $date)
         Write-Host("With Regex: " + $regex + "match: " + $Matches[0])
     }
 
-    $regex2 = "\d+/\d+/\d+"
+    $regex2 = "\d+[-/]\d+[-/]\d+"
     # this Matches "09/04/2017 5:00:00 pm" also
     if($date -match $regex2)
     {
@@ -29,6 +31,7 @@ function Trim-Date([string] $date)
 
 Trim-Date "2017/09/04  5:00:00 PM"
 Trim-Date "09/04/2017  5:00:00 PM"
+Trim-Date "09-04-2017  5:00:00 PM"
 
 
 
