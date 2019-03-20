@@ -37,6 +37,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Nsm.Contracts">
+      <HintPath>D:\CxCache\NsmContracts-release_6_3.6.3.11490.15\lib\net452\Nsm.Contracts.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -52,6 +55,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MyCursor.cs" />
+    <Compile Include="MyLinQ.cs" />
+    <Compile Include="MyList.cs" />
+    <Compile Include="MyMD5.cs" />
+    <Compile Include="MyRegEx.cs" />
     <Compile Include="MySendKeys.cs" />
     <Compile Include="DataContract.cs" />
     <Compile Include="IPHelper.cs" />
@@ -80,6 +87,9 @@
       <Project>{c04fdb43-67d6-46ba-9a3e-ec69618614e0}</Project>
       <Name>TestCode</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

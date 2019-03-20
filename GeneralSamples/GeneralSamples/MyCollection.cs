@@ -62,6 +62,46 @@ namespace GeneralSamples
             AddResourceToNetworkConfigInfoCollection("FEE2", 0, configurationInfoCollection);
         }
 
+        public static void ProcessCollections(ICollection<string> leftKeys, ICollection<string> rightKeys)
+        {
+            leftKeys.OrderBy(p => { return p; }, StringComparer.Ordinal);
+            List<string> keys = new List<string>();
+            int leftKeysIndex = 0;
+            int rightKeysIndex = 0;
+
+            while(leftKeysIndex < leftKeys.Count || rightKeysIndex < rightKeys.Count)
+            {
+                if(leftKeysIndex < leftKeys.Count && rightKeysIndex < rightKeys.Count &&
+                    string.Compare(leftKeys.ElementAt(leftKeysIndex), rightKeys.ElementAt(rightKeysIndex)) == 0)
+                {
+                    keys.Add($"Update {leftKeys.ElementAt(leftKeysIndex)}");
+                    leftKeysIndex++;
+                    rightKeysIndex++;
+                }
+                else if(rightKeysIndex >= rightKeys.Count ||
+                    (leftKeysIndex < leftKeys.Count && 
+                    string.Compare(leftKeys.ElementAt(leftKeysIndex), rightKeys.ElementAt(rightKeysIndex)) < 0))
+                {
+                    keys.Add($"Add Left {leftKeys.ElementAt(leftKeysIndex)}");
+                    leftKeysIndex++;
+                }
+                else
+                {
+                    keys.Add($"Add Right {rightKeys.ElementAt(rightKeysIndex)}");
+                    rightKeysIndex++;
+                }
+            }
+
+            Console.WriteLine($"Processed list: {string.Join(",", keys)}");
+        }
+
+        public static void ValidateProcessCollections()
+        {
+            List<string> leftKeys = new List<string> { "aabb", "ccdd", "eeff", "ffgg", "ffhh", "ffyy", "yyzz", "zzaa" };
+            List<string> rightKeys = new List<string> { "bbdd", "ccdd", "ffii", "ffjj", "ffkk", "ffll", "xxyy" };
+            ProcessCollections(leftKeys, rightKeys);
+        }
+
         private static void AddResourceToNetworkConfigInfoCollection(
            string seed, int type,
            ICollection<RegionalNetworkConfigurationInfo> configurationInfoCollection)

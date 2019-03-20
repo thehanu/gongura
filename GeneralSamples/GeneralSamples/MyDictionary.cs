@@ -51,7 +51,58 @@ namespace GeneralSamples
             }
         }
 
+        public static void ValidateDuplicateAdds()
+        {
+            IDictionary<string, string> dictionary = new Dictionary<string, string>();
+            dictionary.Add("one", "One is one");
+            dictionary.Add("two", "Two is two");
+            dictionary.Add("three", "Three is three");
+            dictionary.Add("one", "One is four now");
 
+            foreach (string key in dictionary.Keys)
+            {
+                Console.WriteLine($"Key: {key}, value: {dictionary[key]}");
+            }
+        }
+
+        public static void ValidateNullKeys()
+        {
+            IDictionary<string, string> dictionary = new Dictionary<string, string>();
+            dictionary.Add("", "Empty is one");
+            dictionary.Add(null, "Null is two");
+
+            foreach (string key in dictionary.Keys)
+            {
+                Console.WriteLine($"Key: {key}, value: {dictionary[key]}");
+            }
+        }
+
+        public static void ValidateKeyIndex()
+        {
+            IDictionary<string, string> dictionary = new Dictionary<string, string>();
+            dictionary.Add("one", "One is one");
+            dictionary.Add("two", "Two is two");
+
+            bool contains = dictionary.ContainsKey("one");
+
+            try
+            {
+                string valueOfNull = dictionary[null];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Exception detail: {e}");
+            }
+            
+            try
+            {
+                string valueOfNoKey = dictionary["three"];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Exception detail: {e}");
+            }
+        }
     }
     
 }

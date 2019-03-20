@@ -258,6 +258,13 @@ namespace GeneralSamples
 
             IPHelpers.ParseSubnet(subnet);
         }
+
+        public static void ParseIPAddressOut()
+        {
+            IPAddress.TryParse("192.168.0.1", out IPAddress ip);
+
+            Console.WriteLine($"IP: {ip}");
+        }
     }
 
 

@@ -49,25 +49,46 @@ namespace GeneralSamples
         {
             Console.WriteLine("I am running in GeneralSamples");
             // MyDictionary.TestKeyAlreadyAddedException();
+            // MyDictionary.ValidateDuplicateAdds();
+            // MyDictionary.ValidateNullKeys();
+            // MyDictionary.ValidateKeyIndex();
             // MyFile.GetDifferentPaths();
             // MyClass.TestMyClass();
             // MyClass.VerifyStringFormat();
+            // MyClass.VerifyStringFormatCurly();
             // MyClass.VerifyNullLoop();
+            // MyClass.VerifyCatchThrowCaughtByFinally();
+            // MyClass.VerifyObjectTest();
+            // MyClass.VerifyStringSplit();
+            // MySimpleClass.LoadClassByName();
             // MyTestCode.RunTestCode();
             // MyRegistry.WaitForDebuggerAttach();
             // WriteOnTheSameLine();
             // MyFile.GetFiles();
+            // MyFile.GetFileEncodings();
             // TestDataContract.TestDataContractBehavior();
             // TestIPHelper.TestIPAddressConversions();
+            // TestIPHelper.ParseIPAddressOut();
             // MyException.ConvertWin32ErrorCodes();
             // MyCollection.WriteCollection();
             // MyCollection.VerifyContains();
             // MyCollection.TryCollectionToString();
+            MyCollection.ValidateProcessCollections();
             // MyFunction.TestNonRef();
             // MyURI.ParseURI();
             // MySendKeys.run();
-            MyCursor.TryMoveCursor();
-
+            // MyCursor.TryMoveCursor();
+            // MyList.VerifyDeleteItems();
+            // MyList.ConvertToString();
+            // MyList.VerifyNullCollection();
+            // MyList.VerifyNullValuesInList();
+            // MyList.VerifyEquals();
+            // MyList.VerifyCopy();
+            // MyList.VerifyFirstOrDefault();
+            // MyRegEx.MatchRegex();
+            // MyClass.VerifyOverrides();
+            // MyClass.TestMyPublicProperty();
+            // IsNullOperator.Validate();
             //GeneralSamplesDLL.MyPublicClass.GetValue("hi");
             // GeneralSamplesDLL.MyPublicClass.CallValidation();
         }

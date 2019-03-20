@@ -31,6 +31,18 @@ namespace GeneralSamples
         [DataMember(Name = "ID")]
         public int IdNumber;
 
+        /// <summary>
+        /// Desired IPAddress prefix length for this interface
+        /// </summary>
+        [DataMember]
+        public ushort DesiredIPAddressPrefixLength { get; set; }
+
+        /// <summary>
+        /// Desired IPAddress family for this interface, used in dual stack NIC
+        /// </summary>
+        [DataMember]
+        public System.Net.Sockets.AddressFamily DesiredIPAddressFamily { get; set; }
+
         // Note that you can apply the DataMemberAttribute to 
         // a private field as well.
         [DataMember]
@@ -42,6 +54,14 @@ namespace GeneralSamples
             LastName = newLName;
             IdNumber = newIdNumber;
             Secret = newfName + newLName + newIdNumber;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendFormat(
+                $"Desired Prefix length: {DesiredIPAddressPrefixLength}, Desired prefix Familysdfsd: {0}", DesiredIPAddressFamily);
+            return stringBuilder.ToString();
         }
 
         // The extensionDataValue field holds data from future versions 
@@ -109,9 +129,9 @@ namespace GeneralSamples
             // Deserialize the data and read it from the instance.
             Person deserializedPerson = (Person)ser.ReadObject(fs);
             fs.Close();
-            Console.WriteLine(String.Format("{0} {1}, ID: {2}",
+            Console.WriteLine(String.Format("{0} {1}, ID: {2}, ToString: {3}",
             deserializedPerson.FirstName, deserializedPerson.LastName,
-            deserializedPerson.IdNumber));
+            deserializedPerson.IdNumber, deserializedPerson.ToString()));
         }
 
     }
