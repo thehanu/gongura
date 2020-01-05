@@ -64,7 +64,8 @@ namespace GeneralSamples
 
         public static void ProcessCollections(ICollection<string> leftKeys, ICollection<string> rightKeys)
         {
-            leftKeys.OrderBy(p => { return p; }, StringComparer.Ordinal);
+            leftKeys.OrderBy(p => p.ToString());
+            rightKeys.OrderBy(p => p, StringComparer.Ordinal);
             List<string> keys = new List<string>();
             int leftKeysIndex = 0;
             int rightKeysIndex = 0;
@@ -97,8 +98,8 @@ namespace GeneralSamples
 
         public static void ValidateProcessCollections()
         {
-            List<string> leftKeys = new List<string> { "aabb", "ccdd", "eeff", "ffgg", "ffhh", "ffyy", "yyzz", "zzaa" };
-            List<string> rightKeys = new List<string> { "bbdd", "ccdd", "ffii", "ffjj", "ffkk", "ffll", "xxyy" };
+            List<string> leftKeys = new List<string> { "yyzz", "ccdd", "ffgg", "aabb", "ffhh", "ffyy", "eeff", "zzaa" };
+            List<string> rightKeys = new List<string> { "bbdd", "ffkk", "ccdd", "ffjj", "ffll", "xxyy", "ffii" };
             ProcessCollections(leftKeys, rightKeys);
         }
 

@@ -14,6 +14,20 @@ namespace GeneralSamples
             }            
         }
 
+        public static void VerifyLogInnerException()
+        {
+            int intValue = 3;
+            try
+            {
+                int result = intValue / 0;
+            }
+            catch (Exception ex)
+            {
+                string message = $"Exception: {ex}, inner exception: [{ex.InnerException}]";
+                Console.WriteLine(message);
+            }
+        }
+
         static Hashtable errorCodes = new Hashtable() {
             { 0x00000000, "The operation completed successfully.ERROR_SUCCESS" },
             { 0x00000001, "Incorrect function.ERROR_INVALID_FUNCTION" },

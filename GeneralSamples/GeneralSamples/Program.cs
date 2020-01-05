@@ -60,7 +60,10 @@ namespace GeneralSamples
             // MyClass.VerifyCatchThrowCaughtByFinally();
             // MyClass.VerifyObjectTest();
             // MyClass.VerifyStringSplit();
+            // MyClass.VerifyStringFormatSimple();
+            // MySimpleClass.CheckTimeSpan();
             // MySimpleClass.LoadClassByName();
+            // MySimpleClass.verifySwitch(8);
             // MyTestCode.RunTestCode();
             // MyRegistry.WaitForDebuggerAttach();
             // WriteOnTheSameLine();
@@ -70,12 +73,14 @@ namespace GeneralSamples
             // TestIPHelper.TestIPAddressConversions();
             // TestIPHelper.ParseIPAddressOut();
             // MyException.ConvertWin32ErrorCodes();
+            // MyException.VerifyLogInnerException();
             // MyCollection.WriteCollection();
             // MyCollection.VerifyContains();
             // MyCollection.TryCollectionToString();
-            MyCollection.ValidateProcessCollections();
+            // MyCollection.ValidateProcessCollections();
             // MyFunction.TestNonRef();
             // MyURI.ParseURI();
+            // MyURI.VerifyUris();
             // MySendKeys.run();
             // MyCursor.TryMoveCursor();
             // MyList.VerifyDeleteItems();
@@ -87,10 +92,26 @@ namespace GeneralSamples
             // MyList.VerifyFirstOrDefault();
             // MyRegEx.MatchRegex();
             // MyClass.VerifyOverrides();
+            // MyClass.CheckConditions();
             // MyClass.TestMyPublicProperty();
+            // MyClass.VerifyRandom();
+            // MyClass.NullIterator();
+            // MyClass.TestMyClassToString();
+            // MyClassOne.TestMyClassOneToString();
+            // MyClass.TryDataObjectToString();
+            //MyClass.GetStackTrace();
+            // MyClass.ValidateGuidFormat();
             // IsNullOperator.Validate();
             //GeneralSamplesDLL.MyPublicClass.GetValue("hi");
             // GeneralSamplesDLL.MyPublicClass.CallValidation();
+            // Setting.VerifyDefaultValue();
+            // FuncArgument.TestFunctionArgument();
+            // MyBenchMark.PerformBenchMarks();
+            // MyTimer.TestTimer();
+            // Task task = MyTask.PerformAsnycMethod();
+            // task.Wait();
+            MyStopWatch.TestStartStop();
+            MySwitch.TestFallthroughCase();
         }
 
 

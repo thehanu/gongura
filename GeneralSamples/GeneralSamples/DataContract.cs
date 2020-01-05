@@ -54,6 +54,7 @@ namespace GeneralSamples
             LastName = newLName;
             IdNumber = newIdNumber;
             Secret = newfName + newLName + newIdNumber;
+            HashSet<string> awards = new HashSet<string>();
         }
 
         public override string ToString()

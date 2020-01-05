@@ -4,29 +4,50 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace GeneralSamples
 {
     class MyClass
     {
         public Dictionary<string, List<string>> TagMap { get; set; }
-        private string subscriptionId;
-        private Guid id;
-        private string value;
+        public string subscriptionId;
+        public Guid id;
+        public string value;
         public List<string> myList = null;
+        private DhcpOptions dhcpOptions = null;
 
         public DhcpOptions DhcpOptions
         { get
             {
-                if (DhcpOptions == null)
+                if (dhcpOptions == null)
                 {
-                    DhcpOptions = new DhcpOptions();
+                    dhcpOptions = new DhcpOptions();
                 }
-                return DhcpOptions;
+                return dhcpOptions;
             }
             set
             {
-                DhcpOptions = value;
+                dhcpOptions = value;
+            }
+        }
+
+        public static void checkBool()
+        {
+
+        }
+
+        public static void VerifyRandom()
+        {
+            Random persistedRand = new Random();
+            for (int i = 0; i < 100; i++)
+            {
+                Random rand = new Random();
+                int assignedPartition = rand.Next() % 10;
+                int persistedRandAssignedPartition = persistedRand.Next() %10;
+                Console.WriteLine($"Persisted Rand next: {persistedRandAssignedPartition}, dynamic rand next: {assignedPartition}");
             }
         }
 
@@ -66,6 +87,30 @@ namespace GeneralSamples
             myClassNull?.GetValues();
         }
 
+        public static void TestMyClassToString()
+        {
+            MyClass myClass = new MyClass("MySubscriptionID", Guid.Empty);
+            Console.WriteLine($"Tostring: {myClass.ToString()}");
+        }
+
+        public static void TryDataObjectToString()
+        {
+            AllocatedIPPrefixDataObject dataObject = new AllocatedIPPrefixDataObject();
+            dataObject.CreatedTime = DateTime.Now;
+            dataObject.OwnerType = "NIC";
+            dataObject.OwnerId = "NIC1";
+            dataObject.Prefix = new AddressPrefix();
+            dataObject.Prefix.IPAddress = "192.168.0.5";
+            Console.WriteLine($"ToStringof DataObject: {dataObject}");
+
+        }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            //return new JavaScriptSerializer().Serialize(this);
+        }
+
         public static void TestMyPublicProperty()
         {
             MyClass myClass = new MyClass("MySubscriptionID", Guid.Empty);
@@ -100,6 +145,17 @@ namespace GeneralSamples
             Console.WriteLine("Dolloar Str: {0}", dollarStr);
         }
 
+        public static void VerifyStringFormatSimple()
+        {
+            string e = "Exception contains { these braces }";
+            Console.WriteLine(GenerateMessage($"sample string {e.ToString().Replace("{", "{{").Replace("}", "}}")}"));
+        }
+        public static string GenerateMessage(string msg, params object[] args)
+        {
+            return string.Format(msg, args);
+        }
+
+
         public static void VerifyStringSplit()
         {
             // Get splits on empty string
@@ -116,6 +172,40 @@ namespace GeneralSamples
             str = "d";
             splits = str.Split('@');
             Console.WriteLine($"Splits of '@' on 'd' string: {string.Join(",", splits)}");
+        }
+
+
+        public static void GetStackTraceOuter()
+        {
+            GetStackTrace();            
+        }
+
+        public static void GetStackTrace()
+        {
+            System.Diagnostics.StackFrame sf = new System.Diagnostics.StackFrame();
+            Console.WriteLine($"Stack Frame declaring type full name: {sf.GetMethod().DeclaringType.FullName}, reflected type full name: { sf.GetMethod().ReflectedType.FullName}, Method name: {sf.GetMethod().Name}");
+
+            System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace();
+            Console.WriteLine($"Stack Frame: {st.GetFrame(0).GetMethod().ReflectedType.FullName}");
+            Console.WriteLine($"Caller Stack Frame: {st.GetFrame(1).GetMethod().ReflectedType.FullName}");
+        }
+
+        public static void NullIterator()
+        {
+            // Iterate through null enumerable
+            IEnumerable<Tuple<string, Guid>> toBeDeletedPublishingInfoTaskIds = null;
+            foreach (var subTaskIdPair in toBeDeletedPublishingInfoTaskIds ?? Enumerable.Empty<Tuple<string, Guid>>())
+            {
+                Console.WriteLine($"Iterating value: {subTaskIdPair}");
+            }
+        }
+
+        public static void ValidateGuidFormat()
+        {
+            Guid id = Guid.NewGuid();
+            string guidString = id.ToString("N");
+
+            Console.WriteLine($"Guid formatted: {guidString}");
         }
 
         public static void VerifyOverrides()
@@ -159,7 +249,58 @@ namespace GeneralSamples
             resultObject = objectTest?.objects;
             Console.WriteLine($"Result object of objectTest?.objects where objectTest is valid and objects is also valid {resultObject}");
         }
+
+        public static void CheckConditions()
+        {
+            if (FirstCondition() && SecondCondition() && ThirdCondition() || FourthCondition())
+            {
+                Console.WriteLine($"I am in condition");
+            }
+            else
+            {
+                Console.WriteLine($"I am out of condition");
+            }
+        }
+
+        private static bool FirstCondition()
+        {
+            bool retValue = true;
+            return retValue;
+        }
+        private static bool SecondCondition()
+        {
+            bool retValue = true;
+            return retValue;
+        }
+
+        private static bool ThirdCondition()
+        {
+            bool retValue = true;
+            return retValue;
+        }
+        private static bool FourthCondition()
+        {
+            bool retValue = false;
+            return retValue;
+        }
     }
+
+    public class Setting
+    {
+        public Int16 value { get; set; }
+
+        Setting()
+        { value = 32; }
+
+        public static readonly Setting Default = new Setting();
+
+        public static void VerifyDefaultValue()
+        {
+            Setting set = default(Setting);
+        }
+    }
+
+    
 
     public class MyPublicClass
     {
@@ -179,6 +320,12 @@ namespace GeneralSamples
             base.CopyTo(destination);
             MyClassOne destinationOne = destination as MyClassOne;
             destinationOne.One = this.One;
+        }
+
+        public static void TestMyClassOneToString()
+        {
+            MyClassOne myclassOne = new MyClassOne("MySubID", Guid.Empty);
+            Console.WriteLine($"ToString: {myclassOne.ToString()}");
         }
     }
 
@@ -293,5 +440,87 @@ namespace GeneralSamples
             Object result = classType.InvokeMember("GetValue", BindingFlags.Default | BindingFlags.InvokeMethod, null, myObject, null);
             Console.WriteLine($"result: {result}");
         }
+
+        public static void verifySwitch(int value)
+        {
+            switch(value)
+            {
+                case 3:
+                    Console.WriteLine("It is #3");
+                    break;
+                case 5:
+                    Console.WriteLine("It is #5");
+                    break;
+            }
+        }
+
+        public static void CheckTimeSpan()
+        {
+            TimeSpan throttlingLoadTime = TimeSpan.FromTicks(0);
+            int throttlingLoadTickCount = 0;
+
+            
+            while (true)
+            {
+                int currentTickCount = Environment.TickCount & Int32.MaxValue;
+                TimeSpan currentTimeSpan = TimeSpan.FromTicks(currentTickCount);
+                TimeSpan diff = currentTimeSpan.Subtract(throttlingLoadTime);
+                if (diff < new TimeSpan(0, 1, 0))
+                {
+                    Console.WriteLine("diff is lesss");
+                }
+
+                int intdiff = currentTickCount - throttlingLoadTickCount;
+                int minsFromMS = (int) TimeSpan.FromMilliseconds(intdiff).TotalMinutes;
+                int minsFromTicks = (int) TimeSpan.FromTicks(intdiff).TotalMinutes;
+                if (intdiff < 500)
+                {
+                    Console.WriteLine("intdiff is less than 500");
+                }
+                throttlingLoadTime = currentTimeSpan;
+                throttlingLoadTickCount = currentTickCount;
+            }
+        }
+    }
+
+    public class SerializeObject
+    {
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+        }
+    }
+
+    [DataContract]
+    public abstract class DataObject : SerializeObject
+    {
+        [DataMember]
+        public DateTime CreatedTime { get; set; }
+
+        [DataMember]
+        public DateTime UpdatedTime { get; set; }
+    }
+
+    [DataContract]
+    public class AddressPrefix : SerializeObject
+    {
+        [DataMember]
+        public string IPAddress { get; set; }
+
+        [DataMember]
+        public ushort Length { get; set; }
+    }
+
+    [DataContract]
+    public class AllocatedIPPrefixDataObject : DataObject
+    {
+        [DataMember]
+        public AddressPrefix Prefix { get; set; }
+
+        [DataMember]
+        public string OwnerId { get; set; }
+
+        [DataMember]
+        public string OwnerType { get; set; }
     }
 }

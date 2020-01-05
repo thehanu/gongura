@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GeneralSamples</RootNamespace>
     <AssemblyName>GeneralSamples</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,6 +38,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\code\Networking\RNM\out\debug-AMD64\Bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Nsm.Contracts">
       <HintPath>D:\CxCache\NsmContracts-release_6_3.6.3.11490.15\lib\net452\Nsm.Contracts.dll</HintPath>
     </Reference>
@@ -45,6 +50,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,6 +60,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyStopWatch.cs" />
+    <Compile Include="MySwitch.cs" />
+    <Compile Include="MyBenchMark.cs" />
     <Compile Include="MyCursor.cs" />
     <Compile Include="MyLinQ.cs" />
     <Compile Include="MyList.cs" />
@@ -67,10 +76,12 @@
     <Compile Include="MyFunction.cs" />
     <Compile Include="MyMock.cs" />
     <Compile Include="MyRegistry.cs" />
+    <Compile Include="MyTask.cs" />
     <Compile Include="MyTestCode.cs" />
     <Compile Include="MyClass.cs" />
     <Compile Include="MyFile.cs" />
     <Compile Include="MyDictionary.cs" />
+    <Compile Include="MyTimer.cs" />
     <Compile Include="MyURI.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -69,4 +69,62 @@ namespace GeneralSamples
             Console.WriteLine("IntCollection: {0}", customerAddressToRegionalConfigInfo);
         }
     }
+
+    class FuncArgument
+    {
+        public delegate string MyFunction(string name, Uri value);
+
+        public static void TestFunctionArgument()
+        {
+            FuncArgument funcArgument = new FuncArgument();
+            string returnValue = funcArgument.ExecuteWithRetry(funcArgument.GetValue, "Hanu");
+
+            returnValue = funcArgument.ExecuteWithRetry(funcArgument.GetNewValue, "Hanu");
+
+            returnValue = PerformWithRetry(funcArgument.GetValue, "Hanu");
+            Uri myUri = PerformWithRetry(funcArgument.GetUriValue, "Hanu");
+        }
+
+        string ExecuteWithRetry(MyFunction myFunction, string name)
+        {
+            Uri uri = new Uri("http://thehanu.com");
+            try
+            {
+                return myFunction(name, uri);
+            }
+            catch
+            {
+                return myFunction(name, null);
+            }
+        }
+
+        string GetValue(string name, Uri uri)
+        {
+            return $"{name}:{uri?.ToString()}";
+        }
+
+        string GetNewValue(string name , Uri uri)
+        {
+            return $"New {name}:{uri?.ToString()}";
+        }
+
+        Uri GetUriValue(string name, Uri uri)
+        {
+            return new Uri($"{uri?.ToString()}/{name})");
+        }
+
+        public static TResult PerformWithRetry<TResult>(Func<string, Uri, TResult> func, string name)
+        {
+            Uri uri = new Uri("http://thehanu.com");
+            try
+            {
+                return func(name, uri);
+            }
+            catch
+            {
+                return func(name, null);
+            }
+        }
+
+    }
 }

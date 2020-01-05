@@ -103,6 +103,21 @@ namespace GeneralSamples
                 Console.WriteLine($"Exception detail: {e}");
             }
         }
+
+        public static void CheckTupleValueIncrement()
+        {
+            Dictionary<string, Tuple<DateTime, int>> OperationToCountDictionary = null;
+
+            if (OperationToCountDictionary == null)
+            {
+                OperationToCountDictionary = new Dictionary<string, Tuple<DateTime, int>>();
+            }
+
+            OperationToCountDictionary.Add("hi", new Tuple<DateTime, int>(DateTime.UtcNow, 100));
+
+            OperationToCountDictionary["hi"] = new Tuple<DateTime, int>(OperationToCountDictionary["hi"].Item1, OperationToCountDictionary["hi"].Item2);
+
+        }
     }
     
 }
