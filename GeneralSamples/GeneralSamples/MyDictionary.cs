@@ -10,8 +10,8 @@ namespace GeneralSamples
     {
         public MyGroup(int i, string d) { id= i; desc = d; }
 
-        int id;
-        string desc;
+        public int id { get; set; }
+        public string desc;
     }
     public class MyDictionary
     {
@@ -117,6 +117,50 @@ namespace GeneralSamples
 
             OperationToCountDictionary["hi"] = new Tuple<DateTime, int>(OperationToCountDictionary["hi"].Item1, OperationToCountDictionary["hi"].Item2);
 
+        }
+
+        public static void ValidateNoKey()
+        {
+            IDictionary<string, string> dictionary = new Dictionary<string, string>();
+            dictionary.Add("one", "One is one");
+            dictionary.Add("two", "Two is two");
+            dictionary.Add("three", "Three is three");
+
+            var result = dictionary.Where(set => set.Value != "One is one");
+
+            IDictionary<string, string> dictionary1 = new Dictionary<string, string>();
+            //dictionary1.Add("one", "One is one");
+            //dictionary1.Add("two", "One is one");
+            //dictionary1.Add("three", "One is one");
+
+            var result1 = dictionary1.Where(set => set.Value != "One is one");
+        }
+
+        public static void VerifyJsonSerialize()
+        {
+            Dictionary<string, Dictionary<string, string>> jsonResponse = new Dictionary<string, Dictionary<string, string>>();
+            Dictionary<string, Dictionary<string, object>> response = new Dictionary<string, Dictionary<string, object>>();
+
+            for(int j = 0; j < 2; j++)
+            {
+                string endpoint = $"endpoint{j}";
+                for (int i = 0; i < 3; i++)
+                {
+                    MyGroup myGroup = new MyGroup(i, $"Group: {i}");
+                    string key = $"key{i}";
+                    if (!jsonResponse.ContainsKey(key))
+                    {
+                        jsonResponse[endpoint] = new Dictionary<string, string>();
+                        response[endpoint] = new Dictionary<string, object>();
+                    }
+
+                    jsonResponse[endpoint].Add(key, Newtonsoft.Json.JsonConvert.SerializeObject(myGroup));
+                    response[endpoint].Add(key, myGroup);
+                }
+            }
+
+            Console.WriteLine($"jsonResponse dictionary with converted json value: {Newtonsoft.Json.JsonConvert.SerializeObject(jsonResponse)}");
+            Console.WriteLine($"response dictionary with object value: {Newtonsoft.Json.JsonConvert.SerializeObject(response, Newtonsoft.Json.Formatting.Indented)}");
         }
     }
     

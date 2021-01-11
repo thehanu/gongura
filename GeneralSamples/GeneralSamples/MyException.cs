@@ -28,6 +28,46 @@ namespace GeneralSamples
             }
         }
 
+        public static void VerifyForceLogInnerException()
+        {
+            Console.WriteLine("Running VerifyForceLogInnerException ---- ----");
+            Exception deepInnerException = new Exception("Example deep inner exception");
+            Exception innerException = new Exception("Example inner exception", deepInnerException);
+            Exception ex = new Exception("Example exception", innerException);
+                        
+            string message = $"Exception: {ex}, {Environment.NewLine}{Environment.NewLine} inner exception: [{ex.InnerException}]";
+            Console.WriteLine(message);
+            Console.WriteLine("Completed VerifyForceLogInnerException ---- ----");
+        }
+
+        public static void VerifyForceLogAggregateException()
+        {
+            int intValue = 3;
+            try
+            {
+                int result = intValue / 0;
+            }
+            catch(Exception exception)
+            {
+                Console.WriteLine("Running VerifyForceLogAggregateException ---- ----");
+                Exception innerException = new Exception("Example inner exception 1", exception);
+                Exception innerException2 = exception;
+                Exception innerException3 = new Exception("Example inner exception 2", exception);
+                Exception ex = new AggregateException("Example Aggregate exception", new Exception[] { innerException, innerException2, innerException3});
+
+                string message = $"Exception: {ex}, {Environment.NewLine}{Environment.NewLine} inner exception: [{ex.InnerException}]";
+                Console.WriteLine(message);
+
+                TraceException(ex);
+                Console.WriteLine("Completed VerifyForceLogAggregateException ---- ----");
+            }
+        }
+
+        public static void TraceException(Exception ex)
+        {
+            Console.WriteLine($"---- ---- TraceException: {ex}");
+        }
+
         static Hashtable errorCodes = new Hashtable() {
             { 0x00000000, "The operation completed successfully.ERROR_SUCCESS" },
             { 0x00000001, "Incorrect function.ERROR_INVALID_FUNCTION" },

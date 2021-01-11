@@ -66,7 +66,7 @@ namespace GeneralSamples
             this.value = value;
         }
 
-        private void Init(string subscriptionId, Guid id)
+        protected void Init(string subscriptionId, Guid id, params string[] fullName)
         {
             this.subscriptionId = subscriptionId;
             this.id = id;
@@ -172,6 +172,44 @@ namespace GeneralSamples
             str = "d";
             splits = str.Split('@');
             Console.WriteLine($"Splits of '@' on 'd' string: {string.Join(",", splits)}");
+        }
+
+        public static void VerifyStringAppend()
+        {
+            List<Exception> exceptions = new List<Exception>();
+            for(int i = 0; i < 6; i++)
+            {
+                exceptions.Add(new Exception($"Exception message {i}"));
+            }
+            string resourceIds = string.Empty;
+            if (exceptions != null)
+            {
+                foreach (Exception exception in exceptions)
+                {
+                    resourceIds += $"{exception.HResult}, ";
+                }
+            }
+
+            Console.WriteLine($"Exception Hresults: {resourceIds}");
+        }
+
+        public static void VerifyTypes()
+        {
+            MyClassTwo classTwo = new MyClassTwo("sub1", new Guid());
+
+            if(classTwo is MyClassOne)
+            {
+                Console.WriteLine("This is MyClassOne");
+            }
+            else if(classTwo is MyClassTwo)
+            {
+                Console.WriteLine("This is MyClassTwo");
+            }
+            
+            if(classTwo is MyClass)
+            {
+                Console.WriteLine("This is MyClass");
+            }
         }
 
 
@@ -326,6 +364,12 @@ namespace GeneralSamples
         {
             MyClassOne myclassOne = new MyClassOne("MySubID", Guid.Empty);
             Console.WriteLine($"ToString: {myclassOne.ToString()}");
+        }
+
+        protected void Init(string str, Guid guid)
+        {
+            Console.WriteLine($"str: {str}, guid: {guid}");
+            base.Init(str, guid);
         }
     }
 
@@ -522,5 +566,13 @@ namespace GeneralSamples
 
         [DataMember]
         public string OwnerType { get; set; }
+    }
+}
+
+namespace ExternalGeneralSamples
+{
+    class MyClassOne : GeneralSamples.MyClassOne
+    {
+        MyClassOne(string subscriptionId, Guid id) : base(subscriptionId, id) { }
     }
 }

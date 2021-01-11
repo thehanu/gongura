@@ -52,6 +52,8 @@ namespace GeneralSamples
             // MyDictionary.ValidateDuplicateAdds();
             // MyDictionary.ValidateNullKeys();
             // MyDictionary.ValidateKeyIndex();
+            // MyDictionary.ValidateNoKey();
+            MyDictionary.VerifyJsonSerialize();
             // MyFile.GetDifferentPaths();
             // MyClass.TestMyClass();
             // MyClass.VerifyStringFormat();
@@ -74,10 +76,14 @@ namespace GeneralSamples
             // TestIPHelper.ParseIPAddressOut();
             // MyException.ConvertWin32ErrorCodes();
             // MyException.VerifyLogInnerException();
+            // MyException.VerifyForceLogInnerException();
+            // MyException.VerifyForceLogAggregateException();
             // MyCollection.WriteCollection();
             // MyCollection.VerifyContains();
             // MyCollection.TryCollectionToString();
             // MyCollection.ValidateProcessCollections();
+            // MyCollection.TestHashSetUnion();
+            // MyCollection.TestReplace();
             // MyFunction.TestNonRef();
             // MyURI.ParseURI();
             // MyURI.VerifyUris();
@@ -90,6 +96,7 @@ namespace GeneralSamples
             // MyList.VerifyEquals();
             // MyList.VerifyCopy();
             // MyList.VerifyFirstOrDefault();
+            // MyList.VerifyDeleteInLoop();
             // MyRegEx.MatchRegex();
             // MyClass.VerifyOverrides();
             // MyClass.CheckConditions();
@@ -99,19 +106,28 @@ namespace GeneralSamples
             // MyClass.TestMyClassToString();
             // MyClassOne.TestMyClassOneToString();
             // MyClass.TryDataObjectToString();
-            //MyClass.GetStackTrace();
+            // MyClass.GetStackTrace();
             // MyClass.ValidateGuidFormat();
             // IsNullOperator.Validate();
-            //GeneralSamplesDLL.MyPublicClass.GetValue("hi");
+            // GeneralSamplesDLL.MyPublicClass.GetValue("hi");
             // GeneralSamplesDLL.MyPublicClass.CallValidation();
             // Setting.VerifyDefaultValue();
             // FuncArgument.TestFunctionArgument();
             // MyBenchMark.PerformBenchMarks();
             // MyTimer.TestTimer();
+            // MyThreadingTimer.TestTimer();
             // Task task = MyTask.PerformAsnycMethod();
             // task.Wait();
-            MyStopWatch.TestStartStop();
-            MySwitch.TestFallthroughCase();
+            // MyStopWatch.TestStartStop();
+            // MySwitch.TestFallthroughCase();
+            // MyYield.TestYield();
+            // MyEnum.TestEnumParse();
+            // MyClass.VerifyStringAppend();
+            // MyClass.VerifyTypes();
+            // MyCast.VerifyDynamicCast();
+            // MyByte.VerifyConversion();
+            // MyByte.VerifyOutParam();
+            // MyString.ValidateFormat();
         }
 
 

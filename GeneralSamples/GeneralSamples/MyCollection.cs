@@ -180,5 +180,26 @@ namespace GeneralSamples
             char[] trimmer = { ',', ' ' };
             return sb.ToString().TrimEnd(trimmer);
         }
+
+        public static void TestHashSetUnion()
+        {
+            HashSet<string> subscriptionIds = new HashSet<string>();
+            subscriptionIds.Add("hellow");
+            subscriptionIds.Add("How are you?");
+            subscriptionIds.UnionWith(Enumerable.Empty<string>());
+            foreach(string id in subscriptionIds)
+            {
+                Console.WriteLine($"string: {id}");
+            }
+        }
+
+        public static void TestReplace()
+        {
+            string type = "mytype";
+            string name = "mypath/name/config/";
+            string ValueType = $"{type}|{name}".Replace('/', '|');
+            //TestFunctionWithStringArray(ValueType);
+            Console.WriteLine($"Value Type: {ValueType}");
+        }
     }
 }

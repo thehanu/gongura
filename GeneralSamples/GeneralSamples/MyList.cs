@@ -85,5 +85,27 @@ namespace GeneralSamples
             last = strings.Last();
             Console.WriteLine($"With Empty list, first or default: {firstOrDefault}, Last: {last}");
         }
+
+        public static void VerifyDeleteInLoop()
+        {
+            List<string> strings = new List<string> { "first", "second", "third", "fourth" };
+
+            strings.AddRange(new List<string> { "One", "two", null, "four", "Five" });
+            for (int index = strings.Count; index > -1; index--)
+            {
+                if (strings[index] == "") ;
+            }
+            foreach (string workingString in strings)
+            {
+                strings.Remove(workingString);
+            }
+        }
+
+        public static void VerifyInitializeComplexObjects()
+        {
+            IEnumerable<MyTestCode> strings = new List<MyTestCode> { new MyTestCode() };
+
+        }
     }
+
 }

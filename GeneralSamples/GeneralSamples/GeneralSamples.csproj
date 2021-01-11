@@ -60,6 +60,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyAsync.cs" />
+    <Compile Include="MyByte.cs" />
+    <Compile Include="MyCast.cs" />
+    <Compile Include="MyEnum.cs" />
+    <Compile Include="MyString.cs" />
+    <Compile Include="MyYield.cs" />
     <Compile Include="MyStopWatch.cs" />
     <Compile Include="MySwitch.cs" />
     <Compile Include="MyBenchMark.cs" />
