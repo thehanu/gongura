@@ -1,0 +1,24 @@
+$number = [int](Read-Host "Enter a number to check if it's prime")
+
+if ($number % 2 -eq 0) {
+    write-output "This number isn't a prime number because it is even"
+}
+else {
+    $is_prime = $true
+    $half = $number / 2
+
+    write-output "Half of $number is $half"
+
+    for ($i = 3; $i -le [int]$half; $i += 2) {
+        write-output "Dividing by $i"
+        if ($number % $i -eq 0) {
+            write-output "This number isn't a prime number as it is divisible by $i"
+            $is_prime = $false
+            break
+        }
+    }
+
+    if ($is_prime) {
+        write-output "This number is a Prime Number!"
+    }
+}
