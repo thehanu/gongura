@@ -1,0 +1,20 @@
+start = int(input("Enter the starting number: "))
+end = int(input("Enter the ending number: "))
+
+for number in range(start, end + 1):
+    if number < 2:
+        print(f"{number} is NOT a prime number (less than 2)")
+    elif number % 2 == 0 and number != 2:
+        print(f"{number} is NOT a prime number (even")
+    else:
+        is_prime = True
+        half = number // 2
+
+        for i in range(3, half + 1, 2):  # Only check odd numbers
+            if number % i == 0:
+                print(f"{number} is NOT a prime number (divisible by {i})")
+                is_prime = False
+                break
+
+        if is_prime:
+            print(f"{number} IS a prime number")
